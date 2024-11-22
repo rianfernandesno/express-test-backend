@@ -1,3 +1,5 @@
+import'dotenv/config';
+import { ObjectId } from "mongodb";
 import conectarAoBanco from "../config/dbConfig.js";
 
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
@@ -18,7 +20,7 @@ export  async function criarPost(novoPost) {
 export  async function atualizarPost(id, novoPost) {
     const db = conexao.db("imersao-instabytes");
     const colecao = db.collection("posts");
-    const objId = Objectid.createFromHexString(id);
+    const objId = ObjectId.createFromHexString(id);
     return colecao.updateOne({_id: new ObjectId(objId)}, {$set:novoPost});
     
 }
