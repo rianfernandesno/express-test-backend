@@ -14,3 +14,11 @@ export  async function criarPost(novoPost) {
     return colecao.insertOne(novoPost);
 
 }
+
+export  async function atualizarPost(id, novoPost) {
+    const db = conexao.db("imersao-instabytes");
+    const colecao = db.collection("posts");
+    const objId = Objectid.createFromHexString(id);
+    return colecao.updateOne({_id: new ObjectId(objId)}, {$set:novoPost});
+    
+}
